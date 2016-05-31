@@ -31,12 +31,14 @@ Route::get('/', function()
 	//libros de usuario 11
 	//$user= User::find(11);
 	//return $user->libros()->get();
+    if(Auth::guest()) return View::make('home');
+	if(Auth::check()) return View::make('private');
 
-	return View::make('home');
 });
 Route::get('/users/eliminar', function()
 {
 	
+	if(Auth::guest()) return Redirect::to('/');
 
 	return View::make('Usuarios.eliminar');
 

@@ -36,7 +36,7 @@ class SessionsController extends \BaseController {
 	{
 		//
 		if(Auth::attempt(Input::only('id','password'))){
-			return Auth::user();
+			return Redirect::to('/');
 		}
 		return 'Failed';
 	}
@@ -86,8 +86,9 @@ class SessionsController extends \BaseController {
 	public function destroy()
 	{
 		//
+		if(Auth::guest()) return Redirect::to('/');
 		Auth::logout();
-		return "loged out";
+		return Redirect::to('/');
 		//return Redirect::route('sessions.create');
 	}
 
